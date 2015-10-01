@@ -47,3 +47,38 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                         'Error: The Geolocation service failed.' :
                         'Error: Your browser doesn\'t support geolocation.');
 }
+
+// A folyamat állása.
+function changeProgress( progress ) {
+    if( !progress ) {
+        progress = document.querySelector( ".progress-value" ).value;
+    }
+    // Reguláris kifejezésekkel eltávolítjuk a nem kívánt karaktereket.
+    progress = progress.replace( /,/g, ".");
+    progress = progress.replace( /[^0-9\.]/g, "");
+//    progress = progress.replace( "A", "");
+//    console.log(progress);
+    progress = parseFloat(progress);
+//    progress = parseInt(progress, 10);
+    if( !progress || isNaN(progress) )
+        return;
+    var bar = document.querySelector( " .progress .progress-bar" );
+    bar.style.width = progress+"%";
+}
+
+// Késleltetett megjelenítés (ezred másodpercben).
+function showModal() {
+    $( "#myModal" ).modal( "show" );
+}
+setTimeout(showModal, 5000);    // Így nem indul el azonnal
+// setTimeout(showModal(), 5000);    // Így azonnal elindul
+
+/*
+setTimeout( function() {
+    $( "#myModal" ).modal( "show" );
+}, 5000 );
+*/
+
+// Popover beállítása
+$('#popover1').popover();
+
